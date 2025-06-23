@@ -1,0 +1,159 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="text-center mb-4">💳 Finalizar Compra</h1>
+    </div>
+  </div>
+
+  <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <!-- Formulário de dados -->
+      <div class="col-lg-8">
+        <div class="card mb-4">
+          <div class="card-header">
+            <h5 class="mb-0">Dados do Cliente</h5>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="customerName" class="form-label">Nome Completo *</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="customerName"
+                  formControlName="customerName"
+                  [class.is-invalid]="submitted && f['customerName'].errors"
+                >
+                <div *ngIf="submitted && f['customerName'].errors" class="invalid-feedback">
+                  <div *ngIf="f['customerName'].errors['required']">Nome é obrigatório</div>
+                  <div *ngIf="f['customerName'].errors['minlength']">Nome deve ter pelo menos 3 caracteres</div>
+                </div>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label for="customerEmail" class="form-label">Email *</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="customerEmail"
+                  formControlName="customerEmail"
+                  [class.is-invalid]="submitted && f['customerEmail'].errors"
+                >
+                <div *ngIf="submitted && f['customerEmail'].errors" class="invalid-feedback">
+                  <div *ngIf="f['customerEmail'].errors['required']">Email é obrigatório</div>
+                  <div *ngIf="f['customerEmail'].errors['email']">Email inválido</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="customerPhone" class="form-label">Telefone *</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="customerPhone"
+                  formControlName="customerPhone"
+                  placeholder="(11) 99999-9999"
+                  [class.is-invalid]="submitted && f['customerPhone'].errors"
+                >
+                <div *ngIf="submitted && f['customerPhone'].errors" class="invalid-feedback">
+                  <div *ngIf="f['customerPhone'].errors['required']">Telefone é obrigatório</div>
+                  <div *ngIf="f['customerPhone'].errors['pattern']">Formato inválido. Use (11) 99999-9999</div>
+                </div>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label for="paymentMethod" class="form-label">Forma de Pagamento *</label>
+                <select
+                  class="form-select"
+                  id="paymentMethod"
+                  formControlName="paymentMethod"
+                  [class.is-invalid]="submitted && f['paymentMethod'].errors"
+                >
+                  <option value="credit_card">Cartão de Crédito</option>
+                  <option value="debit_card">Cartão de Débito</option>
+                  <option value="pix">PIX</option>
+                  <option value="boleto">Boleto Bancário</option>
+                </select>
+                <div *ngIf="submitted && f['paymentMethod'].errors" class="invalid-feedback">
+                  <div *ngIf="f['paymentMethod'].errors['required']">Forma de pagamento é obrigatória</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="shippingAddress" class="form-label">Endereço de Entrega *</label>
+              <textarea
+                class="form-control"
+                id="shippingAddress"
+                rows="3"
+                formControlName="shippingAddress"
+                placeholder="Rua, número, complemento, bairro, cidade, estado, CEP"
+                [class.is-invalid]="submitted && f['shippingAddress'].errors"
+              ></textarea>
+              <div *ngIf="submitted && f['shippingAddress'].errors" class="invalid-feedback">
+                <div *ngIf="f['shippingAddress'].errors['required']">Endereço é obrigatório</div>
+                <div *ngIf="f['shippingAddress'].errors['minlength']">Endereço deve ter pelo menos 10 caracteres</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resumo do pedido -->
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="mb-0">Resumo do Pedido</h5>
+          </div>
+          <div class="card-body">
+            <div *ngFor="let item of cartItems" class="d-flex justify-content-between mb-2">
+              <div>
+                <small class="text-muted">{{ item.product.name }}</small>
+                <br>
+                <small class="text-muted">Qtd: {{ item.quantity }}</small>
+              </div>
+              <span>{{ formatPrice(item.product.price * item.quantity) }}</span>
+            </div>
+
+            <hr>
+
+            <div class="d-flex justify-content-between mb-2">
+              <span>Subtotal:</span>
+              <span>{{ formatPrice(total) }}</span>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+              <span>Frete:</span>
+              <span class="text-success">Grátis</span>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between mb-3">
+              <strong>Total:</strong>
+              <strong class="h5 text-primary">{{ formatPrice(total) }}</strong>
+            </div>
+
+            <button
+              type="submit"
+              class="btn btn-success w-100 mb-2"
+              [disabled]="loading"
+            >
+              <span *ngIf="loading" class="spinner-border spinner-border-sm me-2" role="status"></span>
+              <i *ngIf="!loading" class="bi bi-check-circle me-2"></i>
+              {{ loading ? 'Processando...' : 'Confirmar Pedido' }}
+            </button>
+
+            <button
+              type="button"
+              class="btn btn-outline-secondary w-100"
+              (click)="goBack()"
+              [disabled]="loading"
+            >
+              <i class="bi bi-arrow-left me-2"></i> Voltar ao Carrinho
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

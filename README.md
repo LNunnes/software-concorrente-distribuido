@@ -60,7 +60,7 @@ Como garantir:
 
 ---
 
-## ▶️ Como Executar
+## Instalação do backend
 
 ### 1. Pré-requisitos
 
@@ -96,55 +96,88 @@ cd ../notification
 mvn spring-boot:run
 ```
 
-### 4. Testar
+### 4. Testar (Caso deseje testar sem interface visual)
 
 Envie uma requisição:
 
 ```http
-POST http://localhost:8080/orders
+POST http://localhost:8080/api/orders
 Content-Type: application/json
 
 {
-  "items": [
-    { "productId": 1, "quantity": 2 },
-    { "productId": 2, "quantity": 1 }
-  ]
+    "items": [
+        {
+            "productId": 1,
+            "quantity": 1
+        }
+    ]
 }
 ```
 
-Verifique os logs do `Inventory-Service` e `Notification-Service` para o processamento e notificação.
+## Instalação do Frontend
 
-## 📁 Estrutura dos Projetos
+### 1. Node.js (Obrigatório)
 
-```
-ecommerce-common/
-├── model/
-├── pom.xml
-
-order/
-├── controller/
-├── service/
-├── config/
-├── pom.xml
-
-inventory/
-├── consumer/
-├── producer/
-├── service/
-├── config/
-├── pom.xml
-
-notification/
-├── consumer/
-├── service/
-├── config/
-├── pom.xml
+#### **Windows**
+1. Acesse [nodejs.org](https://nodejs.org)
+2. Baixe a versão **LTS** (recomendado)
+3. Execute o instalador e siga as instruções
+4. Verifique a instalação:
+```bash
+node --version
+npm --version
 ```
 
----
+#### **Linux (Ubuntu/Debian)**
+```bash
+# Atualizar repositórios
+sudo apt update
 
-## ✅ Considerações Finais
+# Instalar Node.js
+curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+sudo apt-get install -y nodejs
 
-- Kafka foi configurado localmente sem Docker.
-- Banco de dados PostgreSQL utilizado para controle de estoque.
-- O projeto explora tópicos, partições, idempotência e tolerância a falhas como base para sistemas distribuídos escaláveis.
+# Verificar instalação
+node --version
+npm --version
+```
+
+### **2. Angular CLI (Obrigatório)**
+
+Após instalar o Node.js, instale o Angular CLI globalmente:
+
+```bash
+npm install -g @angular/cli
+```
+
+**Verificar instalação:**
+```bash
+ng version
+```
+
+##  Configuração do Projeto
+
+### **1. Clonar Projeto**
+
+### **2. Instalar Dependências**
+
+```bash
+# Navegar para a pasta do projeto
+cd ecommerce-frontend
+
+# Instalar todas as dependências
+npm install
+```
+
+**Tempo estimado:** 2-5 minutos (depende da conexão)
+
+##  Executando o Projeto
+
+### **1. Servidor de Desenvolvimento**
+
+```bash
+
+# Ou abrir automaticamente no navegador
+ng serve --open
+```
+

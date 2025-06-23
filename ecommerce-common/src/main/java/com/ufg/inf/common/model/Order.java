@@ -7,11 +7,11 @@ public class Order {
 
     private String orderId;
     private String timestamp;
-    private List<String> items;
+    private List<OrderItem> items;
 
     public Order() {}
 
-    public Order(String orderId, String timestamp, List<String> items) {
+    public Order(String orderId, String timestamp, List<OrderItem> items) {
         this.orderId = orderId;
         this.timestamp = timestamp;
         this.items = items;
@@ -33,11 +33,11 @@ public class Order {
         this.timestamp = timestamp;
     }
 
-    public List<String> getItems() {
+    public List<OrderItem> getItems() {
         return items;
     }
 
-    public void setItems(List<String> items) {
+    public void setItems(List<OrderItem> items) {
         this.items = items;
     }
 }

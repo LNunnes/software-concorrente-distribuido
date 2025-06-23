@@ -1,6 +1,7 @@
 package com.ufg.inf.orderService.service;
 
 import com.ufg.inf.common.model.Order;
+import com.ufg.inf.common.model.OrderItem;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,7 @@ public class OrderService {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    public Order createOrder(List<String> items) {
+    public Order createOrder(List<OrderItem> items) {
         Order order = new Order();
         order.setOrderId(UUID.randomUUID().toString());
         order.setTimestamp(LocalDateTime.now().toString());
