@@ -1,17 +1,17 @@
 
 # Sistema Distribuído de E-commerce com Apache Kafka
 
-## 🔧 Visão Geral
+##  Visão Geral
 
 Este projeto simula um sistema distribuído de e-commerce composto por três microserviços integrados via Apache Kafka. Os serviços trocam eventos em tempo real para processar pedidos, verificar estoque e notificar clientes.
 
-## 🧱 Arquitetura dos Serviços
+##  Arquitetura dos Serviços
 
 - `Order-Service`: produtor que envia pedidos confirmados para o tópico `orders`.
 - `Inventory-Service`: consumidor de `orders` e produtor de `inventory-events`.
 - `Notification-Service`: consumidor de `inventory-events` que simula envio de e-mails ou SMS.
 
-## 🧩 Tecnologias Utilizadas
+##  Tecnologias Utilizadas
 
 - Java 21
 - Spring Boot
@@ -21,7 +21,7 @@ Este projeto simula um sistema distribuído de e-commerce composto por três mic
 
 ---
 
-## ✅ Requisitos Funcionais
+## Requisitos Funcionais
 
 | Código | Descrição |
 |--------|-----------|
@@ -32,7 +32,7 @@ Este projeto simula um sistema distribuído de e-commerce composto por três mic
 
 ---
 
-## 🔁 Requisitos Não-Funcionais
+##  Requisitos Não-Funcionais
 
 ### 1. Escalabilidade
 
