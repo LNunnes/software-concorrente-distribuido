@@ -79,10 +79,10 @@ export class CheckoutComponent implements OnInit {
 
     this.http.post(apiUrl, orderData, { headers })
       .subscribe({
-        next: (response) => {
+        next: (response: any) => {
           console.log('Pedido criado com sucesso:', response);
           this.cartService.clearCart();
-          alert('Pedido realizado com sucesso! Você receberá um email de confirmação.');
+          alert('Pedido realizado com sucesso! Você receberá um email de confirmação. UUID: ' + response.orderId + ' timestamp: ' + response.timestamp);
           this.router.navigate(['/']);
         },
         error: (error) => {
