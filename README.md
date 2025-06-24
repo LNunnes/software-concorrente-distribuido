@@ -60,6 +60,13 @@ Como garantir:
 
 ---
 
+## Banco de dados
+
+- Necessário ter o PostgreSQL
+- Criar um banco chamado "ecommerce".
+- Alterar o arquivo application.yml da aplicação de inventory service, nele a url de conexão do banco está com dados fixos, necessários alterar para os dados da instalação local. 
+- Local do arquivo: \software-concorrente-distribuido\ecommerce-common\inventoryService\src\main\resources
+
 ## Instalação do backend
 
 ### 1. Pré-requisitos
