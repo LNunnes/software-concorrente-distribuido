@@ -60,6 +60,15 @@ Como garantir:
 
 ---
 
+## Kafka
+
+Entrar no diretório que o kafka está instalado localmente e nele rodar os seguintes comandos: 
+
+- bin\windows\zookeeper-server-start.bat config\zookeeper.properties
+- bin\windows\kafka-server-start.bat config\server.properties
+- kafka-topics.sh --create --topic orders --bootstrap-server localhost:9092 --partitions 3 --replication-factor 1
+- kafka-topics.sh --create --topic inventory-events --bootstrap-server localhost:9092 --partitions 3 --replication-factor 1
+
 ## Banco de dados
 
 - Necessário ter o PostgreSQL
